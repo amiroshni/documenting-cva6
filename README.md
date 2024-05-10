@@ -120,7 +120,7 @@ $ sudo apt-get install autoconf automake autotools-dev curl libmpc-dev libmpfr-d
 Unset the RISCV variable (cva6-sdk will setup its own):
 
 ```
-$ unset $RISCV
+$ unset RISCV
 ```
 
 ## Nexys Video change
