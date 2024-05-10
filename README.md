@@ -86,7 +86,7 @@ From this point on, Python dependencies can be installed:
 $ pip3 install -r verif/sim/dv/requirements.txt
 ```
 
-Setting up Spik and Verilator for simulation. The smoke-tests will take a
+Setting up Spike and Verilator for simulation. The smoke-tests will take a
 while (depending on your computer hardware):
 
 ```
