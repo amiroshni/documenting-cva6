@@ -14,7 +14,7 @@ Initial clone:
 ```
 $ cd
 $ git clone https://github.com/openhwgroup/cva6.git cva6_bfff84ea
-$ cd cva6
+$ cd cva6_bfff84ea
 $ git checkout bfff84eaebcc46d07a9274419216e3fb6508f567
 $ git submodule update --init --recursive
 ```
