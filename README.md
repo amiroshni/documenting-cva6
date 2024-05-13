@@ -28,7 +28,7 @@ Toolchain:
 $ sudo apt-get install autoconf automake autotools-dev curl git libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool bc zlib1g-dev
 $ cd util/gcc-toolchain-builder
 $ sh get-toolchain.sh
-$ export RISCV=/home/am/RISCV_nv
+$ export RISCV=$HOME/RISCV_nv
 $ sh build-toolchain.sh $RISCV
 ```
 
