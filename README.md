@@ -5,6 +5,7 @@ Rough notes produces while setting up the CVA design on the Nexys Video FPGA pla
 
 * Commit used for nexys_video testing: <80254abaeeeb46774e5405ca1da3ced378445bc0>
 * Most information came from (most likely more up-to-date):
+  - CVA6 bug https://github.com/openhwgroup/cva6/issues/2116
   - CVA6 repo [readme](https://github.com/openhwgroup/cva6?tab=readme-ov-file)
   - CVA6 toolchain repo builder [readme](https://github.com/openhwgroup/cva6/blob/master/util/gcc-toolchain-builder/README.md#Prerequisites)
   - CVA6-SDK repo [readme](https://github.com/openhwgroup/cva6-sdk)
