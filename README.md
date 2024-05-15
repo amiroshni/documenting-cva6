@@ -163,23 +163,10 @@ Baud rate needs to be 57600.
 
 ## Current results
 
-This is currently what is being printed:
-(My colleague made changes to the 'hello world' printf at the start of
-the bootroom for testing)
+Since last try, we were able to get the bootrom to detect the SD card, load the
+partition table from and SD card, and copy the Linux kernel to RAM. While the
+kernel is booting however, there constant SD card errors (possibly due to us
+using an SDHC type of card).
 
-```
-Hello from RED!
-init SPI
-status: 0x0000000000000025
-status: 0x0000000000000025
-SPI initialized!
-initializing SD...
-SD command cmd0 response : 01
-SD command cmd55 response : 01
-SD command cmd41 response : 01
-SD command cmd55 response : 01
-SD command cmd41 response : 01
-SD command cmd55 response : 01
-SD command cmd41 response : 00
-sd initialized!
-```
+https://gist.github.com/shriyasharma11/12136b710edaa7eac2e1269a903f8cef
+
