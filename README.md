@@ -3,7 +3,7 @@ Rough notes produces while setting up the CVA design on the Nexys Video FPGA pla
 
 # Setting CVA6 on Nexys Video (still experimental)
 
-* Commit used for nexys_video testing: <bfff84eaebcc46d07a9274419216e3fb6508f567>
+* Commit used for nexys_video testing: <80254abaeeeb46774e5405ca1da3ced378445bc0>
 * Most information came from (most likely more up-to-date):
   - CVA6 repo [readme](https://github.com/openhwgroup/cva6?tab=readme-ov-file)
   - CVA6 toolchain repo builder [readme](https://github.com/openhwgroup/cva6/blob/master/util/gcc-toolchain-builder/README.md#Prerequisites)
@@ -13,14 +13,13 @@ Initial clone:
 
 ```
 $ cd
-$ git clone https://github.com/openhwgroup/cva6.git cva6_bfff84ea
-$ cd cva6_bfff84ea
-$ git checkout bfff84eaebcc46d07a9274419216e3fb6508f567
+$ git clone https://github.com/Saute0212/cva6.git saute0212_cva6
+$ cd saute0212_cva6
 $ git submodule update --init --recursive
 ```
 
-(Last tested cva6 is commit
-https://github.com/openhwgroup/cva6/commit/bfff84eaebcc46d07a9274419216e3fb6508f567)
+(Using Saute0212's CVA6 repo, as per his request:
+https://github.com/openhwgroup/cva6/pull/1925#issuecomment-2109032818)
 
 Toolchain:
 
@@ -38,7 +37,7 @@ It is assumed that the RISC-V toolchain is going to be installed to
 the `$HOME/RISCV_nv` directory.
 
 ```
-export CVA6_REPO_DIR=$HOME/cva6_bfff84ea
+export CVA6_REPO_DIR=$HOME/saute0212_cva6
 export RISCV=$HOME/RISCV_nv
 export RISCV_PREFIX=$RISCV/bin/riscv64-unknown-
 export RISCV_GCC=$RISCV/bin/riscv64-unknown-gcc
@@ -47,6 +46,9 @@ export PATH=$RISCV/bin:$PATH
 ```
 
 ## Change compile flags for bootrom on Nexys Video
+
+**NOTE**: This is already done in Saute0212's branch:
+https://github.com/Saute0212/cva6/commit/80254abaeeeb46774e5405ca1da3ced378445bc0
 
 Adjust the compile architecture `-march` flag for bootrom to work
 on Nexys Video (see issue comment
