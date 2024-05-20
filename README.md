@@ -142,6 +142,9 @@ $ make images
 
 # Writing Linux image to SD card
 
+* **NOTE**: It is strongly recommended to use a 4GB micro SD card, as 16GB
+didn't work. This was also recommended by @Saute0212.
+
 Download the URL data (I've no idea what this is, just following instructions here
 https://github.com/openhwgroup/cva6/pull/1925#issuecomment-2053688518):
 
@@ -162,12 +165,9 @@ Upload bitstream to FPGA using Vivado.
 Connect via UART to the FPGA using a terminal emulator (pico/nano/putty etc.).
 Baud rate needs to be 57600.
 
-## Current results
+## Current results - Linux working!
 
-Since last try, we were able to get the bootrom to detect the SD card, load the
-partition table from and SD card, and copy the Linux kernel to RAM. While the
-kernel is booting however, there constant SD card errors (possibly due to us
-using an SDHC type of card).
-
-https://gist.github.com/shriyasharma11/12136b710edaa7eac2e1269a903f8cef
+After switching to 4GB micro SD card, the Linux kernel was able to boot, and
+we logged in as root and tried some of the standard utlities:
+https://gist.github.com/shriyasharma11/8afee5a594f2f05512551a72740426cd
 
