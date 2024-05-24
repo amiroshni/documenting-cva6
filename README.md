@@ -171,3 +171,53 @@ After switching to 4GB micro SD card, the Linux kernel was able to boot, and
 we logged in as root and tried some of the standard utlities:
 https://gist.github.com/shriyasharma11/8afee5a594f2f05512551a72740426cd
 
+# Executing a 'Hello World' binary under Linux
+
+For now a separate branch has been created for a simple 'Hello World' file.
+https://github.com/amiroshni/cva6-sdk/tree/test-hello-nv
+
+The trick is to create a partition in between the firmware payload and
+linux kernel. See commit here for the changes:
+https://github.com/openhwgroup/cva6-sdk/commit/edc03517a7c9f5375726fa0058ec9a4890dbc286
+
+**NOTE:** The plan is to put an actual filesystem (ext4 or fat32) in this new
+partition, but for now just as a test, a simple 'Hello World' binary is
+written and read manually once the Linux kernel boot to prompt on the FPGA.
+
+```
+git checkout test-hello-nv
+make hello
+ls -ll HelloWorld/hello
+```
+
+The last command is needed to find out the binary size in bytes (will be
+needed once inside the FPGA Linux environment).
+
+Upload the image:
+
+```
+sudo make flash-sdcard PAYLOAD=bbl.bin SDDEVICE=/dev/[YOUR SD CARD DEVICE] RISCV=$HOME/cva6-sdk/install64
+```
+
+Once CVA6 Linux on the Nexys Video is loaded with these new SD card partitions,
+copy the `hello` binary from the 2nd partition:
+
+```
+# dd if=/dev/mmcblk0p2 of=hello
+# truncate -s [hello binary size]
+# chmod u+x hello
+# ./hello
+Hello World!
+```
+
+The reason why truncation is required, is because the `hello` binary doesn't
+take up an exact number of sectors. In my colleague's example, the binary
+was 1072 bytes (which took up 3 512-byte sectors):
+https://gist.github.com/shriyasharma11/96f44ef04281130d0ced6de718ee028a#file-putty-log-L109
+
+Once a working filesystem is in place, the entire RISC-V toolchain can be
+on the card, and real development/testing can take place.
+
+**NOTE:** Ejecting the SD card while FPGA was operational caused a reset,
+so plugging in a different SD card wasn't an option.
+
