@@ -221,3 +221,34 @@ on the card, and real development/testing can take place.
 **NOTE:** Ejecting the SD card while FPGA was operational caused a reset,
 so plugging in a different SD card wasn't an option.
 
+# (Incomplete) Setting up a middle partition on the SD card for transferring files
+
+For now, this is a manual process (but similar to instructions in the Makefile),
+and the max size of the second partition which didn't crash was 64MiB
+(`262144-131072 = 131072 512-byte sectors = 67108864 bytes = 64 MiB`).
+
+```
+# sgdisk --clear -g --new=1:2048:29796 --new=2:131072:262144 --new=3:512M:0 --typecode=1:3000 --typecode=2:8300 --typecode=3:8300 /dev/[SD CARD]
+# mkfs -t ext3 /dev/[SD CARD PART 1]
+# mkfs -t ext3 -L fpgastorage /dev/[SD CARD PART 2]
+# mkfs -t ext3 /dev/[SD CARD PART 3]
+# dd if=install64/bbl.bin of=/dev/[SD CARD PART 1] status=progress oflag=sync bs=1M
+# dd if=install64/uImage of=/dev/[SD CARD PART 3] status=progress oflag=sync bs=1M
+# mount /dev/[SD CARD PART 2] /[PATH TO MOUNTED PARTITION]/fpgastorage/
+# cp HelloWorld/hello /[PATH TO MOUNTED PARTITION]/fpgastorage/
+```
+
+When we tried a bigger partition size,
+(`1015808-131072 = 884736 512-byte sectors = 452984832 bytes = 432 MiB`),
+but mounting the partition in the buildroot environment caused the SD card to
+reset, see the previous gist log:
+https://gist.github.com/shriyasharma11/19f975f3ee7783b6012f175546ec6b87
+
+Our plan was to copy the buildroot host toolchain located here:
+
+```
+[CVA6-SDK ROOT]/buildroot/output/host
+```
+
+But this entire toolchain is too big to fit into a 64 MiB partition
+(about 200 MiB).
